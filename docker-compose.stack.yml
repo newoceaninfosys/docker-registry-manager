@@ -1,0 +1,26 @@
+version: '3.2'
+
+services:
+  ui:
+    container_name: registry-manager-ui
+    image: snagles/docker-registry-manager
+    ports:
+      - "8001:8080"
+    volumes:
+      - ./registries.yml:/app/registries.yml
+    networks:
+      - registry_manager_network
+    environment:
+      - MANAGER_PORT=8001
+      - MANAGER_REGISTRIES=/app/registries.yml
+      - MANAGER_LOG_LEVEL=warn
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  registry_manager_network:
+    driver: overlay
+    attachable: true
