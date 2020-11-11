@@ -36,6 +36,7 @@ Docker Registry Manager is a golang written, beego driven, web interface for int
   docker-compose up -d
   firefox localhost:8080
   ```
+ With Stack: `$ docker stack deploy --compose-file=docker-compose.stack.yml registry-manager`
 
 #### Environment Options:
  - MANAGER_PORT: Port to run on inside the docker container
